@@ -3,12 +3,6 @@ import { Link } from 'react-router-dom'
 import Dropdown from '../Dropdown'
 import routes from '../../routes/routes'
 import './headerNavigationLink.css'
-const a: string = 'a'
-
-interface ISubmenu {
-  title: string;
-  url: string;
-}
 
 function HeaderNavigationLink() {
   const [dropdown, setDropdown] = useState(false);

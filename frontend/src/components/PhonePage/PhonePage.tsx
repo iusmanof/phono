@@ -5,7 +5,6 @@ import { deleteLastPhone, selectPhone, post } from '../../features/phones/phones
 function PhonePage() {
     const phonesState = useAppSelector(selectPhone)
     const dispatch = useAppDispatch()
-    const [phones, setPhones] = useState(phonesState)
     // console.log(phonesState)
     const phonesElements = phonesState.map( p => {
         return <div key={p.id}>{p.type} {p.color} {p.inches} {p.price} {p.raiting} {p.type} {p.urlImage}</div>
