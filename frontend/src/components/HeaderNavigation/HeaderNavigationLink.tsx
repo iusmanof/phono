@@ -8,15 +8,16 @@ function HeaderNavigationLink() {
   const [dropdown, setDropdown] = useState(false);
   const routesLinks = routes.map(route => {
     const { submenu } = route
-    return <li>
-      <Link key={route.id} to={route.path}>
-        {route.submenu ? (<><p className="withSubmenu" onClick={() => setDropdown((prev) => !prev)}>{route.title} </p>
+    return <li key={route.id}>
+      <Link to={route.path}>
+        {route.submenu ? 
+          (<><p className="withSubmenu" onClick={() => setDropdown((prev) => !prev)}>{route.title} </p>
           <ul className={`dropdown ${dropdown ? 'show' : ''}`}>
             {submenu?.map(item => {
-              return (<Dropdown {...item} />)
+              return (<Dropdown key={item.id} {...item} />)
             })}
           </ul>
-        </>)
+          </>)
           :
           (<p> {route.title}</p>)}
       </Link>

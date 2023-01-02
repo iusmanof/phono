@@ -6,7 +6,7 @@ import Header from "../Header"
 
 function Routing (){
 
-  const routesPath = routes.map( route => {return <Route path={route.path} element={route.element} /> })
+  const routesPath = routes.map( route => {return <Route key={route.id} path={route.path} element={route.element} /> })
   return(
     <Router>
       <Header />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './dropdown.css'
 
 interface ISubmenu {
@@ -7,9 +7,9 @@ interface ISubmenu {
   url?: string;
 }
 
-function Dropdown({ id, title, path }:{ id: number, title: string; path: string }): JSX.Element {
+function Dropdown({ id, title, path }: { id: number, title: string; path: string }): JSX.Element {
   return (
-    <li><Link key={id} to={path}>{title}</Link></li>
+    <li key={id}><NavLink key={id} to={path}>{title}</NavLink></li>
   )
 }
 
