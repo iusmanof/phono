@@ -28,4 +28,14 @@ let phones = [
     }
 ]
 
-export {phones}
+const randomPhone = {
+    id: Math.floor(Math.random() * 100),
+    inches: 1111,
+    price: "$100.00",
+    color: "black",
+    type: "Smartphone",
+    raiting: 33.33,
+    urlImage: "https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png"
+}
+
+export {phones, randomPhone }
