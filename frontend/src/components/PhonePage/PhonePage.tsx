@@ -1,19 +1,10 @@
-import React, { useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { deleteLastPhone, selectPhone, post } from '../../features/phones/phonesSlice'
+import PhoneList from "../../features/phones/PhonesList"
 
 function PhonePage() {
-    const phonesState = useAppSelector(selectPhone)
-    const dispatch = useAppDispatch()
-    // console.log(phonesState)
-    const phonesElements = phonesState.map( p => {
-        return <div key={p.id}>{p.type} {p.color} {p.inches} {p.price} {p.raiting} {p.type} {p.urlImage}</div>
-    })
     return (
         <div>
             <h1>PhonePage</h1>
-            {phonesElements}
-            <button onClick={() => dispatch(post())}>random add</button>
+            <PhoneList />
         </div>
     )
 }
