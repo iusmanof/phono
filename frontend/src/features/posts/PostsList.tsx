@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetPostsQuery, useDeletePostMutation } from '../api/apiSlice'
+import { useGetPostsQuery, useDeletePostMutation } from '../api/postsApi'
 
 function PostList() {
   const {
@@ -23,7 +23,6 @@ function PostList() {
       )
     })
   }
-
 
   return (<div>
     <div>PostContent: {postContent}</div>

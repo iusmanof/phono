@@ -1,34 +1,50 @@
 {
   "phones": [
     {
-      "id": 1000,
-      "inches": 6.20,
-      "price": "$701.00",
-      "color": "red",
-      "type": "Android Phone",
-      "raiting": 4.3,
-      "urlImage": "https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png"
-  },
-  {
-      "id": 1001,
-      "inches": 6.22,
-      "price": "$101.00",
-      "color": "blue",
-      "type": "iPhone",
-      "raiting": 4.8,
-      "urlImage": "https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png"
-  },
-  {
       "id": 1002,
-      "inches": 3.20,
+      "inches": 3.2,
       "price": "$51.00",
       "color": "black",
       "type": "Smartphone",
       "raiting": 3.3,
       "urlImage": "https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png"
-  }
+    },
+    {
+      "id": 1002,
+      "inches": 3.2,
+      "price": "$51.00",
+      "color": "black",
+      "type": "Smartphone",
+      "raiting": 3.3,
+      "urlImage": "https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png"
+    },
+    {
+      "id": 1002,
+      "inches": 3.2,
+      "price": "$51.00",
+      "color": "black",
+      "type": "Smartphone",
+      "raiting": 3.3,
+      "urlImage": "https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png"
+    }
   ],
-  "posts": [],
+  "posts": [
+    {
+      "id": 1,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+    },
+    {
+      "id": 1,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+    },
+    {
+      "id": 1,
+      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+      "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+    }
+  ],
   "comments": [],
   "profile": {
     "name": "typicode"

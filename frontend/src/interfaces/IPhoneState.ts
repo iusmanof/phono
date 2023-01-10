@@ -1,4 +1,4 @@
-export interface PhonesState {
+export interface IPhonesState {
     id: number;
     inches: number,
     price: string;
