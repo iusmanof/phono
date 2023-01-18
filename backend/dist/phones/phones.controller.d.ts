@@ -5,7 +5,15 @@ export declare class PhonesController {
     private readonly phonesService;
     constructor(phonesService: PhonesService);
     create(createPhoneDto: CreatePhoneDto): string;
-    findAll(): string;
+    findAll(): {
+        id: number;
+        inches: number;
+        price: string;
+        color: string;
+        type: string;
+        raiting: number;
+        urlImage: string;
+    }[];
     findOne(id: string): string;
     update(id: string, updatePhoneDto: UpdatePhoneDto): string;
     remove(id: string): string;
