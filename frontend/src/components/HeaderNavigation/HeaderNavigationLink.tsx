@@ -6,20 +6,22 @@ import './headerNavigationLink.css'
 
 function HeaderNavigationLink() {
   const [dropdown, setDropdown] = useState(false);
+
+  const handler = () => { console.log('hover')}
   const routesLinks = routes.map(route => {
     const { submenu } = route
     return <li key={route.id}>
       {route.submenu ?
         (<>
           <p className="withSubmenu"
-            onMouseEnter={() => setDropdown((true))}
+            onMouseOver={() => setDropdown((true))}
             onMouseLeave={() => setDropdown((false))}
           >
             <Link to={route.path}> {route.title}</Link>
           </p>
           <ul
             className={`dropdown ${dropdown ? 'show' : ''}`}
-            onMouseEnter={() => setDropdown((true))}
+            onMouseOver={() => setDropdown((true))}
             onMouseLeave={() => setDropdown((false))}
           >
             {submenu?.map(item => {

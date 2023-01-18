@@ -26,6 +26,12 @@
       "type": "Smartphone",
       "raiting": 3.3,
       "urlImage": "https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png"
+    },
+    {
+      "id": 1003
+    },
+    {
+      "id": 1004
     }
   ],
   "posts": [

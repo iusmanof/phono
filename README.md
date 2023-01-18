@@ -43,3 +43,8 @@ ecommerce - shopify - technology
   Heroku
 
 # Если появятся дополнительные требования будут записаны ниже
+
+
+Команды для запуска
+json-server --watch db.json --port 4001
+npm run start
