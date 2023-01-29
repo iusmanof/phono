@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePhoneDto } from './dto/create-phone.dto';
 import { UpdatePhoneDto } from './dto/update-phone.dto';
 
@@ -37,23 +38,45 @@ const phonesTest = [
 
 @Injectable()
 export class PhonesService {
-  create(createPhoneDto: CreatePhoneDto) {
-    return 'This action adds a new phone';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createPhoneDto: CreatePhoneDto) {
+    const newPhone = await this.prisma.phone.create({
+      data: {
+        ...createPhoneDto,
+      },
+    });
+    return newPhone;
   }
 
-  findAll() {
-    return phonesTest;
+  async findAll() {
+    return await this.prisma.phone.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} phone`;
+  async findOne(id: number) {
+    return await this.prisma.phone.findUnique({
+      where: {
+        id: id,
+      },
+    });
   }
 
-  update(id: number, updatePhoneDto: UpdatePhoneDto) {
-    return `This action updates a #${id} phone`;
+  async update(id: number, updatePhoneDto: UpdatePhoneDto) {
+    return await this.prisma.phone.update({
+      where: {
+        id: id,
+      },
+      data: {
+        ...updatePhoneDto,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} phone`;
+  async remove(id: number) {
+    return await this.prisma.phone.delete({
+      where: {
+        id: id,
+      },
+    });
   }
 }

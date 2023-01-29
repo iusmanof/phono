@@ -1,9 +1,6 @@
-import { Module } from '@nestjs/common';
-import { PhonesService } from './phones.service';
-import { PhonesController } from './phones.controller';
+import { Global, Module } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 
-@Module({
-  controllers: [PhonesController],
-  providers: [PhonesService],
-})
-export class PhonesModule {}
+@Global()
+@Module({ providers: [PrismaService], exports: [PrismaService] })
+export class PrismaModule {}
