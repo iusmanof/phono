@@ -45,6 +45,20 @@ ecommerce - shopify - technology
 # Если появятся дополнительные требования будут записаны ниже
 
 
-Команды для запуска
-json-server --watch db.json --port 4001
-npm run start
+Команды для запуска тестового локального сервера:
+Backend: cd frontend/ -> json-server --watch db.json --port 4001
+Frontend: cd frontend/ -> npm run start
+
+Команды для запуска servera Nestjs:
+Backend: cd backend/ -> npm run start:dev
+Frontend: cd frontend/ -> npm run start
+
+
+Верстка: 
+- Home
+- Collection / Phones
+- Collection / Power Bank
+- About Us
+- Contact Us
+- Faq's
+- Blog
