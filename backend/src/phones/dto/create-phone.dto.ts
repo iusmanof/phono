@@ -1,9 +1,5 @@
 import { IsInt, IsString } from 'class-validator';
-
 export class CreatePhoneDto {
-  @IsString()
-  title: string;
-
   @IsInt()
   inches: number;
 

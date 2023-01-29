@@ -4,17 +4,9 @@ import { UpdatePhoneDto } from './dto/update-phone.dto';
 export declare class PhonesController {
     private readonly phonesService;
     constructor(phonesService: PhonesService);
-    create(createPhoneDto: CreatePhoneDto): string;
-    findAll(): {
-        id: number;
-        inches: number;
-        price: string;
-        color: string;
-        type: string;
-        raiting: number;
-        urlImage: string;
-    }[];
-    findOne(id: string): string;
-    update(id: string, updatePhoneDto: UpdatePhoneDto): string;
-    remove(id: string): string;
+    create(createPhoneDto: CreatePhoneDto): Promise<import(".prisma/client").Phone>;
+    findAll(): Promise<import(".prisma/client").Phone[]>;
+    findOne(id: string): Promise<import(".prisma/client").Phone>;
+    update(id: string, updatePhoneDto: UpdatePhoneDto): Promise<import(".prisma/client").Phone>;
+    remove(id: string): Promise<import(".prisma/client").Phone>;
 }
