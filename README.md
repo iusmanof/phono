@@ -1,7 +1,6 @@
 # phono
 ecommerce - shopify - technology
 
-
 1.  Реализация каталога товаров ( мобильные телефоны, в дальнейшем другие товарные группы) с удобной навигации; 
 
     В каталоге товаров для каждой группы товаров в должен работать индивидуальный фильтр. 
@@ -42,19 +41,20 @@ ecommerce - shopify - technology
   Cloudinary
   Heroku
 
-# Если появятся дополнительные требования будут записаны ниже
 
 
+5. Для запуска приложения
 Команды для запуска тестового локального сервера:
 Backend: cd frontend/ -> json-server --watch db.json --port 4001
 Frontend: cd frontend/ -> npm run start
 
 Команды для запуска servera Nestjs:
 Backend: cd backend/ -> npm run start:dev
+         docker-compose up -d dev-db
 Frontend: cd frontend/ -> npm run start
 
 
-Верстка: 
+6. Верстка: 
 - Home
 - Collection / Phones
 - Collection / Power Bank
@@ -62,3 +62,8 @@ Frontend: cd frontend/ -> npm run start
 - Contact Us
 - Faq's
 - Blog
+
+
+7. Дополнительные возможности сайта
+- Search Bar
+- Filter
