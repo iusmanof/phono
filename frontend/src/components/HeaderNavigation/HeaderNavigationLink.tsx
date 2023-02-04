@@ -7,7 +7,6 @@ import './headerNavigationLink.css'
 function HeaderNavigationLink() {
   const [dropdown, setDropdown] = useState(false);
 
-  const handler = () => { console.log('hover')}
   const routesLinks = routes.map(route => {
     const { submenu } = route
     return <li key={route.id}>

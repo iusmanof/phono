@@ -65,5 +65,5 @@ Frontend: cd frontend/ -> npm run start
 
 
 7. Дополнительные возможности сайта
-- Search Bar
++ Search Bar
 - Filter
