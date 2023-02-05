@@ -24,7 +24,13 @@ let PhonesController = class PhonesController {
     create(createPhoneDto) {
         return this.phonesService.create(createPhoneDto);
     }
-    findAll() {
+    findAll(request) {
+        if (request.query.color || request.query.raiting || request.query.page) {
+            const color = request.query.color;
+            const sort = request.query.raiting;
+            const page = request.query.page;
+            return this.phonesService.filterByColorRatingPagination(color, sort, page);
+        }
         return this.phonesService.findAll();
     }
     findOne(id) {
@@ -46,8 +52,9 @@ __decorate([
 ], PhonesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], PhonesController.prototype, "findAll", null);
 __decorate([

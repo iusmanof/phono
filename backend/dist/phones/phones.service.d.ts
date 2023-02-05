@@ -9,4 +9,5 @@ export declare class PhonesService {
     findOne(id: number): Promise<import(".prisma/client").Phone>;
     update(id: number, updatePhoneDto: UpdatePhoneDto): Promise<import(".prisma/client").Phone>;
     remove(id: number): Promise<import(".prisma/client").Phone>;
+    filterByColorRatingPagination(color: string, sort: any, page: any): Promise<import(".prisma/client").Phone[]>;
 }

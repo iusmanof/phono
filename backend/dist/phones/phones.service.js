@@ -52,7 +52,7 @@ let PhonesService = class PhonesService {
         return newPhone;
     }
     async findAll() {
-        return await this.prisma.phone.findMany();
+        return await this.prisma.phone.findMany({ take: 6 });
     }
     async findOne(id) {
         return await this.prisma.phone.findUnique({
@@ -73,6 +73,22 @@ let PhonesService = class PhonesService {
         return await this.prisma.phone.delete({
             where: {
                 id: id,
+            },
+        });
+    }
+    async filterByColorRatingPagination(color, sort, page) {
+        const showItemsOnPage = 6;
+        const offset = (page - 1) * showItemsOnPage;
+        return await this.prisma.phone.findMany({
+            skip: offset,
+            take: showItemsOnPage,
+            where: {
+                color: {
+                    startsWith: color,
+                },
+            },
+            orderBy: {
+                raiting: sort,
             },
         });
     }
