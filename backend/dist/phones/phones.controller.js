@@ -31,6 +31,14 @@ let PhonesController = class PhonesController {
             const page = request.query.page;
             return this.phonesService.filterByColorRatingPagination(color, sort, page);
         }
+        if (request.query.price_from ||
+            request.query.price_to ||
+            request.query.page) {
+            const price_from = Number(request.query.price_from);
+            const price_to = Number(request.query.price_to);
+            const page = request.query.page;
+            return this.phonesService.filterByPriceWithPagination(price_from, price_to, page);
+        }
         return this.phonesService.findAll();
     }
     findOne(id) {

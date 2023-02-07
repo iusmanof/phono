@@ -10,4 +10,5 @@ export declare class PhonesService {
     update(id: number, updatePhoneDto: UpdatePhoneDto): Promise<import(".prisma/client").Phone>;
     remove(id: number): Promise<import(".prisma/client").Phone>;
     filterByColorRatingPagination(color: string, sort: any, page: any): Promise<import(".prisma/client").Phone[]>;
+    filterByPriceWithPagination(price_from: number, price_to: number, page: any): Promise<import(".prisma/client").Phone[]>;
 }

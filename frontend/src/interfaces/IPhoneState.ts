@@ -1,7 +1,7 @@
 export interface IPhonesState {
     id: number;
     inches: number,
-    price: string;
+    price: number;
     color: string;
     type: string;
     raiting: number;

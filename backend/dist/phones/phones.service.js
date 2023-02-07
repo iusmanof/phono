@@ -92,6 +92,35 @@ let PhonesService = class PhonesService {
             },
         });
     }
+    async filterByPriceWithPagination(price_from, price_to, page) {
+        const showItemsOnPage = 6;
+        const offset = (page - 1) * showItemsOnPage;
+        let objWhere;
+        if (isNaN(price_from)) {
+            objWhere = {
+                price: {
+                    lte: price_to,
+                },
+            };
+        }
+        if (isNaN(price_to)) {
+            objWhere = {
+                price: {
+                    gte: price_from,
+                },
+            };
+        }
+        return await this.prisma.phone.findMany({
+            skip: offset || 0,
+            take: showItemsOnPage,
+            where: objWhere || {
+                price: {
+                    gte: price_from,
+                    lte: price_to,
+                },
+            },
+        });
+    }
 };
 PhonesService = __decorate([
     (0, common_1.Injectable)(),
