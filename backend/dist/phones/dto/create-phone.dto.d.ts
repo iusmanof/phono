@@ -1,6 +1,6 @@
 export declare class CreatePhoneDto {
     inches: number;
-    price: string;
+    price: number;
     color: string;
     type: string;
     raiting: number;

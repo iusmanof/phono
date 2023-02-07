@@ -80,7 +80,7 @@ let PhonesService = class PhonesService {
         const showItemsOnPage = 6;
         const offset = (page - 1) * showItemsOnPage;
         return await this.prisma.phone.findMany({
-            skip: offset,
+            skip: offset || 0,
             take: showItemsOnPage,
             where: {
                 color: {

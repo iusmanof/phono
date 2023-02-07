@@ -14,8 +14,8 @@ model Phone{
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
 
-  inches Int
-  price String
+  inches Float
+  price Int
   color String
   type String
   raiting Int

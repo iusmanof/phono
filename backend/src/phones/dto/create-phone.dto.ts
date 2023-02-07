@@ -3,8 +3,8 @@ export class CreatePhoneDto {
   @IsInt()
   inches: number;
 
-  @IsString()
-  price: string;
+  @IsInt()
+  price: number;
 
   @IsString()
   color: string;
