@@ -3,19 +3,15 @@ ecommerce - shopify - technology
 
 1.  Реализация каталога товаров ( мобильные телефоны, в дальнейшем другие товарные группы) с удобной навигации; 
 
-    В каталоге товаров для каждой группы товаров в должен работать индивидуальный фильтр. 
-    Параметры фильтрации мобильного: 
-     - Touch Display
-     - Color
-     - Price
-     - Brand
+    + В каталоге товаров для каждой группы товаров в должен работать индивидуальный фильтр. 
+    + Параметры фильтрации мобильного: 
+     + Color
+     + Price
+     + Brand
  
     Представление товаров с их характеристиками — полная информация о товаре на детальной странице, с возможностью купить; 
 
-    
-
     Смена языка : rus / eng;
-
 
     Шаблон сайта: https://phono-demo.myshopify.com/
 
@@ -53,8 +49,20 @@ Backend: cd backend/ -> npm run start:dev
          docker-compose up -d dev-db
 Frontend: cd frontend/ -> npm run start
 
+6. Plan
++ Search Bar
++ Filter
++ Sorting
++ Pagination
+- Basket Redux state
+- Form order fulfillment process
+- GET/phones/1 detail characteristics
 
-6. Верстка: 
+Admin panel 
+- watch orders
+- DELETE, PATCH, POST phone data
+
+Make up pages(layout)
 - Home
 - Collection / Phones
 - Collection / Power Bank
@@ -63,7 +71,7 @@ Frontend: cd frontend/ -> npm run start
 - Faq's
 - Blog
 
-
-7. Дополнительные возможности сайта
-+ Search Bar
-- Filter
+PROD:
+- DOCKER postgres HEROKU 
+- DOCKER nestjs   HEROKU
+- DOCKER react    HEROKU
