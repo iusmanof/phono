@@ -35,6 +35,12 @@ const phonesApi = apiSlice.injectEndpoints({
                 credentials: 'include'
             })
         }),
+        filterByPages: build.query({
+            query: (pages) => ({
+                url: `/phones?page=${pages}`,
+                method: 'GET',
+            }),
+        }),
         filterByColor: build.query({
             query: (color) => ({
                 url: `/phones?color=${color}`,
@@ -71,4 +77,12 @@ const phonesApi = apiSlice.injectEndpoints({
     overrideExisting: false,
 })
 
-export const { useGetPhonesQuery, usePostPhoneMutation, usePatchPhoneMutation, useDeletePhoneMutation, useLazyFilterByColorQuery, useLazyFilterByPriceQuery } = phonesApi
+export const { 
+    useGetPhonesQuery, 
+    usePostPhoneMutation, 
+    usePatchPhoneMutation, 
+    useDeletePhoneMutation, 
+    useLazyFilterByColorQuery, 
+    useLazyFilterByPriceQuery, 
+    useLazyFilterByPagesQuery
+} = phonesApi

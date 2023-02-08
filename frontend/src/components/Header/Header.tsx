@@ -26,7 +26,7 @@ if (isGetLoading) {
     </div>
   )
 } else if (isGetSuccess) {
-  postContent = phones.filter((i: IPhonesState)=> i.type.toLowerCase().includes(query)).map((item: IPhonesState) => {
+  postContent = phones.data.filter((i: IPhonesState)=> i.type.toLowerCase().includes(query)).map((item: IPhonesState) => {
     return (
       <div key={item.id}>{item.type} {item.color} {item.inches} {item.price} {item.raiting}</div>
     )

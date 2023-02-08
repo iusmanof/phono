@@ -52,7 +52,14 @@ let PhonesService = class PhonesService {
         return newPhone;
     }
     async findAll() {
-        return await this.prisma.phone.findMany({ take: 6 });
+        const totalData = await this.prisma.phone.findMany();
+        const prismaTake = 6;
+        const pages = Math.ceil(totalData.length / prismaTake);
+        const phonesWithPagination = await this.prisma.phone.findMany({
+            take: prismaTake,
+        });
+        const meta = { total: totalData.length, prismaTake, pages };
+        return { data: phonesWithPagination, meta };
     }
     async findOne(id) {
         return await this.prisma.phone.findUnique({

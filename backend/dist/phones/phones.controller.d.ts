@@ -5,9 +5,70 @@ import { Request } from 'express';
 export declare class PhonesController {
     private readonly phonesService;
     constructor(phonesService: PhonesService);
-    create(createPhoneDto: CreatePhoneDto): Promise<import(".prisma/client").Phone>;
-    findAll(request: Request): Promise<import(".prisma/client").Phone[]>;
-    findOne(id: string): Promise<import(".prisma/client").Phone>;
-    update(id: string, updatePhoneDto: UpdatePhoneDto): Promise<import(".prisma/client").Phone>;
-    remove(id: string): Promise<import(".prisma/client").Phone>;
+    create(createPhoneDto: CreatePhoneDto): Promise<{
+        createdAt: Date;
+        inches: number;
+        price: number;
+        color: string;
+        type: string;
+        raiting: number;
+        urlImage: string;
+        id: number;
+    }>;
+    findAll(request: Request): Promise<{
+        createdAt: Date;
+        inches: number;
+        price: number;
+        color: string;
+        type: string;
+        raiting: number;
+        urlImage: string;
+        id: number;
+    }[]> | Promise<{
+        data: {
+            createdAt: Date;
+            inches: number;
+            price: number;
+            color: string;
+            type: string;
+            raiting: number;
+            urlImage: string;
+            id: number;
+        }[];
+        meta: {
+            total: number;
+            prismaTake: number;
+            pages: number;
+        };
+    }>;
+    findOne(id: string): Promise<{
+        createdAt: Date;
+        inches: number;
+        price: number;
+        color: string;
+        type: string;
+        raiting: number;
+        urlImage: string;
+        id: number;
+    }>;
+    update(id: string, updatePhoneDto: UpdatePhoneDto): Promise<{
+        createdAt: Date;
+        inches: number;
+        price: number;
+        color: string;
+        type: string;
+        raiting: number;
+        urlImage: string;
+        id: number;
+    }>;
+    remove(id: string): Promise<{
+        createdAt: Date;
+        inches: number;
+        price: number;
+        color: string;
+        type: string;
+        raiting: number;
+        urlImage: string;
+        id: number;
+    }>;
 }

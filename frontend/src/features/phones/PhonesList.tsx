@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { IPhonesState } from '../../interfaces/IPhoneState'
-import { useGetPhonesQuery, useLazyFilterByColorQuery, useLazyFilterByPriceQuery,  } from '../api/phonesApi'
+import { useGetPhonesQuery, useLazyFilterByColorQuery, useLazyFilterByPriceQuery, useLazyFilterByPagesQuery } from '../api/phonesApi'
 
 function PhoneList() {
 
     const [phonesData, setPhonesData] = useState([])
-
+    const [pages, setPages] = useState<number[]>([])
     const {
         data: phones,
     } = useGetPhonesQuery({ refetchOnMountOrArgChange: true })
     const [getDataByColor, resultsColor] = useLazyFilterByColorQuery()
     const [getDataByPrice, resultPrice] = useLazyFilterByPriceQuery()
+    const [getDataByPagination, resultPagination] = useLazyFilterByPagesQuery()
 
     useEffect(() => {
         if(phones) {
-            setPhonesData(phones)
+            const numberOfPages = phones.meta.pages + 1
+            let numberOfPagesFillArray = Array.from({length: numberOfPages}, (x, i) => i).slice(1)
+
+            setPhonesData(phones.data)
+            setPages(numberOfPagesFillArray)
         }
     }, [phones])
 
@@ -30,6 +35,12 @@ function PhoneList() {
         }
     }, [resultPrice])
 
+    useEffect(() => {
+        if (resultPagination && resultPagination.data){
+            setPhonesData(resultPagination.data)
+        }
+    }, [resultPagination])
+
     let currentData = phonesData.map((phoneItem: IPhonesState) => {
         return (
             <li key={phoneItem.id}>
@@ -42,6 +53,13 @@ function PhoneList() {
             </li>
         )
     })
+
+    let pagesPagination = pages.map((i) => {
+        return (
+            <button onClick={() => {getDataByPagination(i)}}>{i}</button>
+        )
+    })
+    
 
     return (
         <div>
@@ -66,6 +84,9 @@ function PhoneList() {
             PhoneList:
             {currentData}
             <hr />
+            <ul>
+              {pagesPagination}
+            </ul>
         </div>
     )
 }

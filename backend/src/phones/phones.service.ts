@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePhoneDto } from './dto/create-phone.dto';
 import { UpdatePhoneDto } from './dto/update-phone.dto';
+import pagination from 'prisma-extension-pagination';
+import { PrismaClient } from '@prisma/client';
 
 const phonesTest = [
   {
@@ -50,7 +52,16 @@ export class PhonesService {
   }
 
   async findAll() {
-    return await this.prisma.phone.findMany({ take: 6 });
+    const totalData = await this.prisma.phone.findMany();
+    const prismaTake = 6;
+    const pages = Math.ceil(totalData.length / prismaTake);
+
+    const phonesWithPagination = await this.prisma.phone.findMany({
+      take: prismaTake,
+    });
+
+    const meta = { total: totalData.length, prismaTake, pages };
+    return { data: phonesWithPagination, meta };
   }
 
   async findOne(id: number) {
