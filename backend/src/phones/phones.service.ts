@@ -55,12 +55,12 @@ export class PhonesService {
     const totalData = await this.prisma.phone.findMany();
     const prismaTake = 6;
     const pages = Math.ceil(totalData.length / prismaTake);
+    const meta = { total: totalData.length, prismaTake, pages };
 
     const phonesWithPagination = await this.prisma.phone.findMany({
       take: prismaTake,
     });
 
-    const meta = { total: totalData.length, prismaTake, pages };
     return { data: phonesWithPagination, meta };
   }
 
@@ -92,11 +92,7 @@ export class PhonesService {
   }
 
   async filterByColorRatingPagination(color: string, sort, page) {
-    const showItemsOnPage = 6;
-    const offset = (page - 1) * showItemsOnPage;
-    return await this.prisma.phone.findMany({
-      skip: offset || 0,
-      take: showItemsOnPage,
+    const filter = {
       where: {
         color: {
           startsWith: color,
@@ -105,7 +101,22 @@ export class PhonesService {
       orderBy: {
         raiting: sort,
       },
+    };
+    const totalData = await this.prisma.phone.findMany(filter);
+    const prismaTake = 6;
+    const pages = Math.ceil(totalData.length / prismaTake);
+    const meta = { total: totalData.length, prismaTake, pages };
+
+    const showItemsOnPage = 6;
+    const offset = (page - 1) * showItemsOnPage;
+    const phonesWithColor = await this.prisma.phone.findMany({
+      skip: offset || 0,
+      take: showItemsOnPage,
+      where: filter.where,
+      orderBy: filter.orderBy,
     });
+
+    return { data: phonesWithColor, meta };
   }
 
   async filterByPriceWithPagination(
@@ -113,6 +124,11 @@ export class PhonesService {
     price_to: number,
     page,
   ) {
+    const totalData = await this.prisma.phone.findMany();
+    const prismaTake = 6;
+    const pages = Math.ceil(totalData.length / prismaTake);
+    const meta = { total: totalData.length, prismaTake, pages };
+
     const showItemsOnPage = 6;
     const offset = (page - 1) * showItemsOnPage;
 
@@ -133,7 +149,7 @@ export class PhonesService {
       };
     }
 
-    return await this.prisma.phone.findMany({
+    const phonesWithPrice = await this.prisma.phone.findMany({
       skip: offset || 0,
       take: showItemsOnPage,
       where: objWhere || {
@@ -143,5 +159,7 @@ export class PhonesService {
         },
       },
     });
+
+    return { data: phonesWithPrice, meta };
   }
 }

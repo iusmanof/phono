@@ -6,33 +6,24 @@ export declare class PhonesController {
     private readonly phonesService;
     constructor(phonesService: PhonesService);
     create(createPhoneDto: CreatePhoneDto): Promise<{
-        createdAt: Date;
         inches: number;
         price: number;
         color: string;
         type: string;
         raiting: number;
         urlImage: string;
+        createdAt: Date;
         id: number;
     }>;
     findAll(request: Request): Promise<{
-        createdAt: Date;
-        inches: number;
-        price: number;
-        color: string;
-        type: string;
-        raiting: number;
-        urlImage: string;
-        id: number;
-    }[]> | Promise<{
         data: {
-            createdAt: Date;
             inches: number;
             price: number;
             color: string;
             type: string;
             raiting: number;
             urlImage: string;
+            createdAt: Date;
             id: number;
         }[];
         meta: {
@@ -42,33 +33,33 @@ export declare class PhonesController {
         };
     }>;
     findOne(id: string): Promise<{
-        createdAt: Date;
         inches: number;
         price: number;
         color: string;
         type: string;
         raiting: number;
         urlImage: string;
+        createdAt: Date;
         id: number;
     }>;
     update(id: string, updatePhoneDto: UpdatePhoneDto): Promise<{
-        createdAt: Date;
         inches: number;
         price: number;
         color: string;
         type: string;
         raiting: number;
         urlImage: string;
+        createdAt: Date;
         id: number;
     }>;
     remove(id: string): Promise<{
-        createdAt: Date;
         inches: number;
         price: number;
         color: string;
         type: string;
         raiting: number;
         urlImage: string;
+        createdAt: Date;
         id: number;
     }>;
 }
