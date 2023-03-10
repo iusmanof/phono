@@ -63,13 +63,20 @@ export declare class PhonesService {
         id: number;
     }>;
     universalRequest(obj: any): Promise<{
-        createdAt: Date;
-        inches: number;
-        price: number;
-        color: string;
-        type: string;
-        raiting: number;
-        urlImage: string;
-        id: number;
-    }[]>;
+        data: {
+            createdAt: Date;
+            inches: number;
+            price: number;
+            color: string;
+            type: string;
+            raiting: number;
+            urlImage: string;
+            id: number;
+        }[];
+        meta: {
+            total: number;
+            take: any;
+            pages: number;
+        };
+    }>;
 }

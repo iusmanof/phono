@@ -16,15 +16,22 @@ export declare class PhonesController {
         id: number;
     }>;
     findAll(request: Request): Promise<{
-        createdAt: Date;
-        inches: number;
-        price: number;
-        color: string;
-        type: string;
-        raiting: number;
-        urlImage: string;
-        id: number;
-    }[]> | Promise<{
+        data: {
+            createdAt: Date;
+            inches: number;
+            price: number;
+            color: string;
+            type: string;
+            raiting: number;
+            urlImage: string;
+            id: number;
+        }[];
+        meta: {
+            total: number;
+            take: any;
+            pages: number;
+        };
+    }> | Promise<{
         data: {
             createdAt: Date;
             inches: number;

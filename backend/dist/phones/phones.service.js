@@ -73,8 +73,14 @@ let PhonesService = class PhonesService {
             where: whereData,
             orderBy: orderByData
         });
-        console.log(phonesWithWhere);
-        return phonesWithWhere;
+        const totalData = await this.prisma.phone.findMany({
+            where: whereData,
+            orderBy: orderByData
+        });
+        const pages = Math.ceil(totalData.length / obj.take);
+        const meta = { total: totalData.length, take: obj.take, pages };
+        console.log({ data: phonesWithWhere, meta });
+        return { data: phonesWithWhere, meta };
     }
 };
 PhonesService = __decorate([
