@@ -25,19 +25,20 @@ let PhonesController = class PhonesController {
         return this.phonesService.create(createPhoneDto);
     }
     findAll(request) {
-        if (request.query.color || request.query.raiting || request.query.page) {
-            const color = request.query.color;
-            const sort = request.query.raiting;
-            const page = request.query.page;
-            return this.phonesService.filterByColorRatingPagination(color, sort, page);
-        }
-        if (request.query.price_from ||
+        if (request.query.sorting ||
+            request.query.price_from ||
             request.query.price_to ||
+            request.query.color ||
+            request.query.raiting ||
             request.query.page) {
             const price_from = Number(request.query.price_from);
             const price_to = Number(request.query.price_to);
+            const color = request.query.color;
+            const sorting = request.query.sorting;
             const page = request.query.page;
-            return this.phonesService.filterByPriceWithPagination(price_from, price_to, page);
+            const take = Number(request.query.take);
+            const paramObj = { price_from, price_to, color, sorting, page: page || 1, take: take || 6 };
+            return this.phonesService.universalRequest(paramObj);
         }
         return this.phonesService.findAll();
     }

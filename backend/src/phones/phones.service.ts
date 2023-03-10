@@ -2,44 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePhoneDto } from './dto/create-phone.dto';
 import { UpdatePhoneDto } from './dto/update-phone.dto';
-import pagination from 'prisma-extension-pagination';
-import { PrismaClient } from '@prisma/client';
-
-const phonesTest = [
-  {
-    id: 1000,
-    inches: 6.2,
-    price: '$701.00',
-    color: 'red',
-    type: 'Android Phone',
-    raiting: 4.3,
-    urlImage:
-      'https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png',
-  },
-  {
-    id: 1001,
-    inches: 6.22,
-    price: '$101.00',
-    color: 'blue',
-    type: 'iPhone',
-    raiting: 4.8,
-    urlImage:
-      'https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png',
-  },
-  {
-    id: 1002,
-    inches: 3.2,
-    price: '$51.00',
-    color: 'black',
-    type: 'Smartphone',
-    raiting: 3.3,
-    urlImage:
-      'https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png',
-  },
-];
 
 @Injectable()
 export class PhonesService {
+  prismaTake: number = 6;
+
+
   constructor(private prisma: PrismaService) {}
 
   async create(createPhoneDto: CreatePhoneDto) {
@@ -53,12 +21,11 @@ export class PhonesService {
 
   async findAll() {
     const totalData = await this.prisma.phone.findMany();
-    const prismaTake = 6;
-    const pages = Math.ceil(totalData.length / prismaTake);
-    const meta = { total: totalData.length, prismaTake, pages };
+    const pages = Math.ceil(totalData.length / this.prismaTake);
+    const meta = { total: totalData.length, prismaTake: this.prismaTake, pages };
 
     const phonesWithPagination = await this.prisma.phone.findMany({
-      take: prismaTake,
+      take: this.prismaTake,
     });
 
     return { data: phonesWithPagination, meta };
@@ -91,75 +58,39 @@ export class PhonesService {
     });
   }
 
-  async filterByColorRatingPagination(color: string, sort, page) {
-    const filter = {
-      where: {
-        color: {
-          startsWith: color,
-        },
-      },
-      orderBy: {
-        raiting: sort,
-      },
-    };
-    const totalData = await this.prisma.phone.findMany(filter);
-    const prismaTake = 6;
-    const pages = Math.ceil(totalData.length / prismaTake);
-    const meta = { total: totalData.length, prismaTake, pages };
+  async universalRequest(obj){
+    let whereData = {};
+    let orderByData = []
 
-    const showItemsOnPage = 6;
-    const offset = (page - 1) * showItemsOnPage;
-    const phonesWithColor = await this.prisma.phone.findMany({
-      skip: offset || 0,
-      take: showItemsOnPage,
-      where: filter.where,
-      orderBy: filter.orderBy,
-    });
-
-    return { data: phonesWithColor, meta };
-  }
-
-  async filterByPriceWithPagination(
-    price_from: number,
-    price_to: number,
-    page,
-  ) {
-    const totalData = await this.prisma.phone.findMany();
-    const prismaTake = 6;
-    const pages = Math.ceil(totalData.length / prismaTake);
-    const meta = { total: totalData.length, prismaTake, pages };
-
-    const showItemsOnPage = 6;
-    const offset = (page - 1) * showItemsOnPage;
-
-    let objWhere;
-    if (isNaN(price_from)) {
-      objWhere = {
-        price: {
-          lte: price_to,
-        },
-      };
+    if( obj.color){
+      whereData = { color: obj.color , ...whereData}
     }
 
-    if (isNaN(price_to)) {
-      objWhere = {
-        price: {
-          gte: price_from,
-        },
-      };
+    if( obj.price_from || obj.price_to){
+      whereData = { price: { gte: obj.price_from || 0, lte: obj.price_to || 999999 }, ...whereData}
     }
 
-    const phonesWithPrice = await this.prisma.phone.findMany({
-      skip: offset || 0,
-      take: showItemsOnPage,
-      where: objWhere || {
-        price: {
-          gte: price_from,
-          lte: price_to,
-        },
-      },
-    });
+    if( obj.sorting){
+      orderByData.push({ price: obj.sorting })
+    }
+    
+    const offset = (obj.page - 1) * obj.take;
 
-    return { data: phonesWithPrice, meta };
+    const phonesWithWhere = await this.prisma.phone.findMany({ 
+      skip: offset || 0, 
+      take: obj.take,
+      where: whereData,
+      orderBy: orderByData
+    });
+    console.log(phonesWithWhere)
+
+
+    return phonesWithWhere
+   
   }
 }
+
+
+
+// npm run start:dev
+// docker-compose up -d dev-db

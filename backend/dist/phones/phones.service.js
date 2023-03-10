@@ -12,38 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PhonesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
-const phonesTest = [
-    {
-        id: 1000,
-        inches: 6.2,
-        price: '$701.00',
-        color: 'red',
-        type: 'Android Phone',
-        raiting: 4.3,
-        urlImage: 'https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png',
-    },
-    {
-        id: 1001,
-        inches: 6.22,
-        price: '$101.00',
-        color: 'blue',
-        type: 'iPhone',
-        raiting: 4.8,
-        urlImage: 'https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png',
-    },
-    {
-        id: 1002,
-        inches: 3.2,
-        price: '$51.00',
-        color: 'black',
-        type: 'Smartphone',
-        raiting: 3.3,
-        urlImage: 'https://res.cloudinary.com/dxedgvxdu/image/upload/v1672321789/phono/mobile_dhbboj.png',
-    },
-];
 let PhonesService = class PhonesService {
     constructor(prisma) {
         this.prisma = prisma;
+        this.prismaTake = 6;
     }
     async create(createPhoneDto) {
         const newPhone = await this.prisma.phone.create({
@@ -53,11 +25,10 @@ let PhonesService = class PhonesService {
     }
     async findAll() {
         const totalData = await this.prisma.phone.findMany();
-        const prismaTake = 6;
-        const pages = Math.ceil(totalData.length / prismaTake);
-        const meta = { total: totalData.length, prismaTake, pages };
+        const pages = Math.ceil(totalData.length / this.prismaTake);
+        const meta = { total: totalData.length, prismaTake: this.prismaTake, pages };
         const phonesWithPagination = await this.prisma.phone.findMany({
-            take: prismaTake,
+            take: this.prismaTake,
         });
         return { data: phonesWithPagination, meta };
     }
@@ -83,64 +54,27 @@ let PhonesService = class PhonesService {
             },
         });
     }
-    async filterByColorRatingPagination(color, sort, page) {
-        const filter = {
-            where: {
-                color: {
-                    startsWith: color,
-                },
-            },
-            orderBy: {
-                raiting: sort,
-            },
-        };
-        const totalData = await this.prisma.phone.findMany(filter);
-        const prismaTake = 6;
-        const pages = Math.ceil(totalData.length / prismaTake);
-        const meta = { total: totalData.length, prismaTake, pages };
-        const showItemsOnPage = 6;
-        const offset = (page - 1) * showItemsOnPage;
-        const phonesWithColor = await this.prisma.phone.findMany({
-            skip: offset || 0,
-            take: showItemsOnPage,
-            where: filter.where,
-            orderBy: filter.orderBy,
-        });
-        return { data: phonesWithColor, meta };
-    }
-    async filterByPriceWithPagination(price_from, price_to, page) {
-        const totalData = await this.prisma.phone.findMany();
-        const prismaTake = 6;
-        const pages = Math.ceil(totalData.length / prismaTake);
-        const meta = { total: totalData.length, prismaTake, pages };
-        const showItemsOnPage = 6;
-        const offset = (page - 1) * showItemsOnPage;
-        let objWhere;
-        if (isNaN(price_from)) {
-            objWhere = {
-                price: {
-                    lte: price_to,
-                },
-            };
+    async universalRequest(obj) {
+        let whereData = {};
+        let orderByData = [];
+        if (obj.color) {
+            whereData = Object.assign({ color: obj.color }, whereData);
         }
-        if (isNaN(price_to)) {
-            objWhere = {
-                price: {
-                    gte: price_from,
-                },
-            };
+        if (obj.price_from || obj.price_to) {
+            whereData = Object.assign({ price: { gte: obj.price_from || 0, lte: obj.price_to || 999999 } }, whereData);
         }
-        const phonesWithPrice = await this.prisma.phone.findMany({
+        if (obj.sorting) {
+            orderByData.push({ price: obj.sorting });
+        }
+        const offset = (obj.page - 1) * obj.take;
+        const phonesWithWhere = await this.prisma.phone.findMany({
             skip: offset || 0,
-            take: showItemsOnPage,
-            where: objWhere || {
-                price: {
-                    gte: price_from,
-                    lte: price_to,
-                },
-            },
+            take: obj.take,
+            where: whereData,
+            orderBy: orderByData
         });
-        return { data: phonesWithPrice, meta };
+        console.log(phonesWithWhere);
+        return phonesWithWhere;
     }
 };
 PhonesService = __decorate([
