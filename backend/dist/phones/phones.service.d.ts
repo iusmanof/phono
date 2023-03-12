@@ -6,24 +6,24 @@ export declare class PhonesService {
     prismaTake: number;
     constructor(prisma: PrismaService);
     create(createPhoneDto: CreatePhoneDto): Promise<{
-        createdAt: Date;
         inches: number;
         price: number;
         color: string;
         type: string;
         raiting: number;
         urlImage: string;
+        createdAt: Date;
         id: number;
     }>;
     findAll(): Promise<{
         data: {
-            createdAt: Date;
             inches: number;
             price: number;
             color: string;
             type: string;
             raiting: number;
             urlImage: string;
+            createdAt: Date;
             id: number;
         }[];
         meta: {
@@ -33,44 +33,44 @@ export declare class PhonesService {
         };
     }>;
     findOne(id: number): Promise<{
-        createdAt: Date;
         inches: number;
         price: number;
         color: string;
         type: string;
         raiting: number;
         urlImage: string;
+        createdAt: Date;
         id: number;
     }>;
     update(id: number, updatePhoneDto: UpdatePhoneDto): Promise<{
-        createdAt: Date;
         inches: number;
         price: number;
         color: string;
         type: string;
         raiting: number;
         urlImage: string;
+        createdAt: Date;
         id: number;
     }>;
     remove(id: number): Promise<{
-        createdAt: Date;
         inches: number;
         price: number;
         color: string;
         type: string;
         raiting: number;
         urlImage: string;
+        createdAt: Date;
         id: number;
     }>;
     universalRequest(obj: any): Promise<{
         data: {
-            createdAt: Date;
             inches: number;
             price: number;
             color: string;
             type: string;
             raiting: number;
             urlImage: string;
+            createdAt: Date;
             id: number;
         }[];
         meta: {

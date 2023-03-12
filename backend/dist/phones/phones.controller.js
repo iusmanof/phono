@@ -30,7 +30,8 @@ let PhonesController = class PhonesController {
             request.query.price_to ||
             request.query.color ||
             request.query.raiting ||
-            request.query.page) {
+            request.query.page ||
+            request.query.take) {
             const price_from = Number(request.query.price_from);
             const price_to = Number(request.query.price_to);
             const color = request.query.color;
